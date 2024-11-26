@@ -1,0 +1,87 @@
+Can you improve this sql code by making it show the amount of pending (status_fld = 'Pending') according to the queue_no_fld (ranges from 1-4) of the user? 
+
+                    $sql_queue_rules = "SELECT a.queue_id_fld as queue_id_fld, 
+                    c.uname_fld as uname_fld,
+                    CONCAT(c.fname_fld, ' ', c.lname_fld) as fullname,
+                    d.department_name_fld as department_name_fld, 
+                    e.program_name_fld as program_name_fld, 
+                    b.queue_name_fld as queue_name_fld, 
+                    b.queue_no_fld as queue_no_fld, 
+                    a.is_final_fld as is_final_fld,
+                    c.uname_id_fld as uname_id_fld
+            FROM queue_rules_tbl AS a
+            LEFT 
+            JOIN queue_tbl AS b 
+                ON a.queue_no_id_fld = b.queue_no_id_fld
+            LEFT 
+            JOIN user_tbl AS c 
+                ON a.uname_id_fld = c.uname_id_fld
+            LEFT 
+            JOIN department_tbl AS d
+                ON a.department_id_fld = d.department_id_fld
+            LEFT 
+            JOIN program_tbl AS e
+                ON a.program_id_fld = e.program_id_fld
+                WHERE c.uname_id_fld = ?";
+
+        $stmt_queue_rules = $mysqli->prepare($sql_queue_rules);
+        $searchTerm_queue_rules = (int)$_SESSION["user_id"];
+        $stmt_queue_rules->bind_param('i', $searchTerm_queue_rules);
+        $stmt_queue_rules->execute();
+        $result_queue_rules = $stmt_queue_rules->get_result();
+
+        $data = [];
+
+        $queue_number = 0;
+        $queue_query = "";
+
+        while ($row = $result_queue_rules->fetch_assoc()) {
+        // $data[] = $row;
+
+            if($row['queue_no_fld'] == 1){
+            // $data[] = $row['queue_no_fld'];
+            $queue_number = $row['queue_no_fld'];
+            $queue_query = "AND first_noted_by_fld is NULL
+                    AND second_noted_by_fld is NULL   
+                    AND evaluated_by_fld is NULL 
+                    AND approved_by_fld is NULL";
+            break;
+            }elseif($row['queue_no_fld'] == 2){
+            // $data[] = $row['queue_no_fld'];
+            $queue_number = $row['queue_no_fld'];
+            $queue_query = "AND first_noted_by_fld is not NULL
+                    AND second_noted_by_fld is NULL   
+                    AND evaluated_by_fld is NULL 
+                    AND approved_by_fld is NULL";
+            break;
+            }elseif($row['queue_no_fld'] == 3){
+            // $data[] = $row['queue_no_fld'];
+            $queue_number = $row['queue_no_fld'];
+            $queue_query = "AND first_noted_by_fld is not NULL
+                    AND second_noted_by_fld is not NULL   
+                    AND evaluated_by_fld is NULL 
+                    AND approved_by_fld is NULL";
+            break;
+            }elseif($row['queue_no_fld'] == 4){
+            // $data[] = $row['queue_no_fld'];
+            $queue_number = $row['queue_no_fld'];
+            $queue_query = "AND first_noted_by_fld is not NULL
+                    AND second_noted_by_fld is not NULL   
+                    AND evaluated_by_fld is not NULL 
+                    AND approved_by_fld is NULL";
+            break;
+            }
+        }
+
+        $sql_club_event_proposal = "SELECT club_event_name_fld, 
+                                            target_date_fld, 
+                                            status_fld,
+                                            date_submitted_fld
+                                    FROM club_event_proposal_tbl
+                                    WHERE status_fld = 'Pending' ". $queue_query .";";
+
+        $sql_pending = "SELECT COUNT(status_fld = 'Pending') AS pending_amount FROM club_event_proposal_tbl
+        WHERE submitted_by_fld = '".$user["uname_fld"]."'";
+
+        $result_pending = $mysqli->query($sql_pending);
+        $pending_amount = $result_pending->fetch_assoc()['pending_amount'];

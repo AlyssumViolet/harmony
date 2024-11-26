@@ -1,0 +1,55 @@
+SELECT a.queue_id_fld as queue_id_fld, 
+	   d.department_name_fld as department_name_fld, 
+	   e.program_name_fld as program_name_fld, 
+	   b.queue_name_fld as queue_name_fld, 
+	   b.queue_no_fld as queue_no_fld, 
+	   a.is_final_fld as is_final_fld, 
+	   c.uname_fld as uname_fld
+  FROM queue_rules_tbl AS a
+LEFT 
+  JOIN queue_tbl AS b 
+    ON a.queue_no_id_fld = b.queue_no_id_fld
+LEFT 
+  JOIN user_tbl AS c 
+    ON a.uname_id_fld = c.uname_id_fld
+LEFT 
+  JOIN department_tbl AS d
+    ON a.department_id_fld = d.department_id_fld
+LEFT 
+  JOIN program_tbl AS e
+    ON a.program_id_fld = e.program_id_fld
+ORDER BY a.queue_id_fld;
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT a.queue_id_fld as queue_id_fld, 
+	   d.department_name_fld as department_name_fld, 
+	   e.program_name_fld as program_name_fld, 
+	   b.queue_name_fld as queue_name_fld, 
+	   b.queue_no_fld as queue_no_fld, 
+	   a.is_final_fld as is_final_fld, 
+	   c.uname_fld as uname_fld,
+       CONCAT(c.fname_fld, ' ', c.lname_fld) as fullname
+  FROM queue_rules_tbl AS a
+LEFT 
+  JOIN queue_tbl AS b 
+    ON a.queue_no_id_fld = b.queue_no_id_fld
+LEFT 
+  JOIN user_tbl AS c 
+    ON a.uname_id_fld = c.uname_id_fld
+LEFT 
+  JOIN department_tbl AS d
+    ON a.department_id_fld = d.department_id_fld
+LEFT 
+  JOIN program_tbl AS e
+    ON a.program_id_fld = e.program_id_fld
+ORDER BY a.queue_id_fld;

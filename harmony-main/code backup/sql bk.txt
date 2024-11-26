@@ -1,0 +1,107 @@
+localhost:3306/harmony_db/department_tbl/		http://localhost/phpmyadmin/index.php?route=/table/sql&db=harmony_db&table=department_tbl
+Your SQL query has been executed successfully.
+
+SHOW CREATE TABLE department_tbl;
+
+
+
+CREATE TABLE `department_tbl` (
+  department_id_fld int(255) NOT NULL,
+  department_name_fld varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+
+localhost:3306/harmony_db/department_tbl/		http://localhost/phpmyadmin/index.php?route=/table/sql&db=harmony_db&table=department_tbl
+Your SQL query has been executed successfully.
+
+SHOW CREATE TABLE queue_rules_tbl;
+
+
+
+CREATE TABLE queue_rules_tbl (
+  queue_id_fld varchar(255) NOT NULL,
+  queue_no_fld int(128) NOT NULL,
+  department_id_fld int(255) NOT NULL,
+  uname_fld varchar(255) NOT NULL,
+  is_final_fld varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;	
+
+
+
+
+
+Full texts
+ department_id_fld
+ department_name_fld
+
+Edit Edit
+Copy Copy
+Delete Delete
+1
+Information Technology
+
+Edit Edit
+Copy Copy
+Delete Delete
+2
+Computer Engineer
+
+Edit Edit
+Copy Copy
+Delete Delete
+3
+Tourism Management
+
+Edit Edit
+Copy Copy
+Delete Delete
+4
+Hospitality Management
+
+Edit Edit
+Copy Copy
+Delete Delete
+5
+General Education
+
+Edit Edit
+Copy Copy
+Delete Delete
+6
+Senior High School
+
+Edit Edit
+Copy Copy
+Delete Delete
+7
+Student Affairs
+
+Edit Edit
+Copy Copy
+Delete Delete
+8
+Academic Head
+
+Edit Edit
+Copy Copy
+Delete Delete
+9
+School Administrator
+
+
+
+
+College
+	General Education
+		Information Technology
+		Computer Engineering
+		Tourism Management
+		Hospitality Management
+	
+	
+Senior High School
+	
+
+INSERT INTO `queue_rules_tbl` (`queue_id_fld`, `queue_no_fld`, `department_id_fld`, `program_id_fld`, `uname_id_fld`, `is_final_fld`) VALUES (NULL, '1', '1', '6', '14', '1'), (NULL, '2', '1', '1', '15', '0'), (NULL, '2', '1', '2', '15', '0'), (NULL, '2', '1', '3', '16', '0'), (NULL, '2', '1', '4', '16', '0'), (NULL, '2', '1', '5', '17', '1'), (NULL, '3', '1', '7', '11', '1'), (NULL, '4', '1', '8', '3', '1');
+

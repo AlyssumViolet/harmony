@@ -1,0 +1,1675 @@
+<!-- web_admin_user_management.php: Create User (11/11/24)
+<div style="margin-top: -30px;
+            margin-left: 20px;
+            
+            display: line-grid;
+            width: 300px;">
+            <h5><b><i class="fa fa-user-plus"></i> Create User</b></h5>
+<table>
+    <form action="process-users.php" method="post" id="process-users" novalidate>
+        <div>
+            <label for="uname_lbl">Username:</label><br>
+            <input class="w3-input w3-border" type="text" id="uname_lbl" name="uname_lbl" required>
+            <div class="error-message" id="uname_error">Please enter a username.</div>
+        </div>
+
+        <div>
+            <label for="fname_lbl">First Name:</label><br>
+            <input class="w3-input w3-border" type="text" id="fname_lbl" name="fname_lbl" required>
+            <div class="error-message" id="fname_error">Please enter a first name.</div>
+        </div>
+
+        <div>
+            <label for="lname_lbl">Last Name:</label><br>
+            <input class="w3-input w3-border" type="text" id="lname_lbl" name="lname_lbl" required>
+            <div class="error-message" id="lname_error">Please enter a last name.</div>
+        </div>
+
+        <div>
+            <label for="role_lbl">Role:</label><br>
+            <select class="w3-input w3-border" name="role_lbl" id="role_lbl" required>
+                <option value=""></option>
+                <option value="Administrator">Administrator</option>
+                <option value="Club Advisor">Club Advisor</option>
+                <option value="Campus Supervisor">Campus Supervisor</option>
+            </select>
+            <div class="error-message" id="role_error">Please select a role.</div>
+        </div>
+
+        <div>
+            <label for="email_lbl">Email:</label><br>
+            <input class="w3-input w3-border" type="email" id="email_lbl" name="email_lbl" required>
+            <div class="error-message" id="email_error">Please enter a valid email address.</div>
+        </div>
+
+        <div>
+            <label for="password_lbl">Password:</label><br>
+            <input class="w3-input w3-border" type="password" id="password_lbl" name="password_lbl" required>
+            <div class="error-message" id="password_error">Please enter a password.</div>
+        </div>
+
+        <div>
+            <label for="password_confirmation_lbl">Repeat Password:</label><br>
+            <input class="w3-input w3-border" type="password" id="password_confirmation_lbl" name="password_confirmation_lbl" required>
+            <div class="error-message" id="password_confirmation_error">Passwords do not match.</div>
+        </div>
+
+        <br>
+        <br>
+        <button type="submit" class="w3-button w3-dark-grey" onclick="validateForm(event)">Create Account <i class="fa fa-user-plus"></i></button>
+    </form>
+</table>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- web_admin_user_management.php: User List (11/11/24)
+    <hr>
+    <?php 
+
+    $sql_users = "SELECT uname_fld, fname_fld, lname_fld, role_fld, email_fld FROM user_tbl";
+
+        $result_users = $mysqli->query($sql_users);
+        $rowcount=mysqli_num_rows($result_users);
+        $all_users = $result_users->fetch_all();
+
+        //var_dump($all_users);
+        // foreach($all_users as $column) {
+        //   echo $column[0]."<br/>";
+        
+        // }
+    ?>
+
+    <div class="w3-container" style="margin-top: -32px">
+        <h5><b><i class="fa fa-user-circle-o"></i> User List</b></h5>
+            <div style="max-height: 300px; overflow-y: auto;">
+                <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+                <tr>
+                    <th>Username</th>
+                    <th>Firstname</th>
+                    <th>Surname</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                </tr>
+                    <tbody>
+                        
+                        <?php
+
+                        foreach ($all_users as $column) {
+                            echo 
+                                "<tr><td>".$column[0]."</td>".
+                                    "<td>".$column[1]."</td>".
+                                    "<td>".$column[2]."</td>".
+                                    "<td>".$column[3]."</td>".
+                                        "<td>".$column[4]."</td></tr>";
+                        }
+
+                        //Iterating each row;
+                        // for($i=0;$i<$rowcount;$i++)
+                        // {
+                        //     echo '<tr><td>'.$all_users[$i]['uname_fld'].'</td></tr>'.
+                        //          '<tr><td>'.$all_users[$i]['fname_fld'].'</td></tr>'.
+                        //          '<tr><td>'.$all_users[$i]['lname_fld'].'</td></tr>'.
+                        //          '<tr><td>'.$all_users[$i]['role_fld'].'</td></tr>'.
+                        //          '<tr><td>'.$all_users[$i]['email_fld'].'</td></tr>'.
+                        //          '<tr><td> <a href="index.php?content=calendar" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit fa-fw"></i>  Edit</a></td></tr>"';
+                        // }
+
+                        
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        <br>
+    </div>
+
+    <hr> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- Queue Number Select -->
+                            <div class="select-container">
+                                <label for="queue-number-search">Queue Number:</label><br>
+                                <select class="w3-input w3-border flex-input" id="queue-number-search" name="queue-number-search" required>
+                                    <option value="">Select Queue Number</option>
+                                    <?php while ($row = $result->fetch_assoc()): ?>
+                                        <option value="<?= htmlspecialchars($row['queue_no_id_fld']) ?>">
+                                            <?= htmlspecialchars($row['queue_no_id_fld']) ?>
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
+                                <div class="error-message" id="queue_number_error">Please select a queue number.</div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+web_admin_queue_rules.php
+
+            // var queue_number_array = [
+            //     {
+            //         id: 0,
+            //         text: 'false'
+            //     },
+            //     {
+            //         id: 1,
+            //         text: 'true'
+            //     }
+            // ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           // //User Select2
+            // $('#user-search').select2({
+            //     placeholder: "Select for a Campus Supervisor...",
+            //     ajax: {
+            //         url: 'fetch-users.php',
+            //         type: 'POST',
+            //         dataType: 'json',
+            //         delay: 250,
+            //         data: function (params) {
+            //             return {
+            //                 q: params.term
+            //             };
+            //         },
+            //         processResults: function (data) {
+            //             return {
+            //                 results: data
+            //             };
+            //         },
+            //         cache: true
+            //     },
+            //     minimumInputLength: 1
+            // });
+
+
+            //Department Select2
+            $('#department-search').select2({
+                placeholder: "Select for a Department...",
+                ajax: {
+                    url: 'fetch-department.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
+            });
+
+
+            //Program Select2
+            $('#program-search').select2({
+                placeholder: "Search for a Program...",
+                ajax: {
+                    url: 'fetch-program.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
+            });
+
+            //Queue Number Select2
+            $('#queue-number-search').select2({
+                placeholder: "e.g. Approved by",
+                ajax: {
+                    url: 'fetch-queue-number.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1
+            });
+
+
+        //Is Final Select2
+            $(document).ready(function() {
+                $('#is-final-search').select2();
+            });
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MULTIPLE CHOICES SELECT2 DRAFTS FOR VENUES
+
+    // $(document).ready(function() {
+    //     $('.js-example-basic-multiple').select2();
+    // });
+
+
+//Venue Select2
+    // $('#venue_lbl').select2({
+    //         placeholder: "Enter/Select a Venue...",
+    //         ajax: {
+    //             url: 'fetch-venue.php',
+    //             type: 'POST',
+    //             dataType: 'json',
+    //             delay: 250,
+    //             data: function (params) {
+    //                 return {
+    //                     q: params.term
+    //                 };
+    //             },
+    //             processResults: function (data) {
+    //                 return {
+    //                     results: data
+    //                 };
+    //             },
+    //             cache: true
+    //         }
+    //     });
+
+
+        // $(document).ready(function() {
+        // // Initialize Select2
+        //     $('#venue_lbl').select2({
+        //         placeholder: "Select venues...",
+        //         ajax: {
+        //             url: "fetch-venue.php",
+        //             dataType: 'json',
+        //             processResults: function(data) {
+        //                 return {
+        //                     results: data
+        //                 };
+        //             }
+        //         },
+        //     });
+        // });
+
+
+
+    // $(document).ready(function() {
+    //     $('#venue-select').select2({
+    //         placeholder: "Select or add venue/s...",
+    //         tags: true, // Enables user input
+    //         tokenSeparators: [',', ' '],
+    //         ajax: {
+    //             url: "fetch-venue.php",
+    //             dataType: 'json',
+    //             processResults: function(data) {
+    //                 return {
+    //                     results: data
+    //                 };
+    //             }
+    //         },
+    //         createTag: function(params) {
+    //             let term = $.trim(params.term);
+    //             if (term === '') {
+    //                 return null;
+    //             }
+    //             return {
+    //                 id: term, // Use the term as the id for custom values
+    //                 text: term,
+    //                 newOption: true // Mark custom input as a new option
+    //             };
+    //         }
+    //     });
+    // });
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // $(document).ready(function() {
+    //     // Initialize Select2
+    //     $('#venue_lbl').select2({
+    //         placeholder: "Select or add venues...",
+    //         tags: true, // Allow adding custom inputs
+    //         tokenSeparators: [',', ' '],
+    //         ajax: {
+    //             url: "fetch-venue.php", // Script to fetch existing options from database
+    //             dataType: 'json',
+    //             processResults: function(data) {
+    //                 return {
+    //                     results: data // Ensure the backend returns data in the correct format
+    //                 };
+    //             }
+    //         },
+    //         createTag: function(params) {
+    //             let term = $.trim(params.term);
+    //             if (term === '') {
+    //                 return null;
+    //             }
+    //             return {
+    //                 id: term, // Custom value
+    //                 text: term,
+    //                 newOption: true
+    //             };
+    //         }
+    //     });
+    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+
+    // $('#venue_lbl').select2({
+    //     placeholder: "Select or add venues...",
+    //     tags: true, 
+    //     tokenSeparators: [',', ' '],
+    //     ajax: {
+    //         url: "get-venues.php",
+    //         dataType: 'json',
+    //         processResults: function(data) {
+    //             return {
+    //                 results: data
+    //             };
+    //         }
+    //     },
+    //     createTag: function(params) {
+    //         let term = $.trim(params.term);
+    //         if (term === '') {
+    //             return null;
+    //         }
+    //         return {
+    //             id: term,
+    //             text: term,
+    //             newOption: true
+    //         };
+    //     }
+    // });
+
+    $('#venue_lbl').select2({
+        placeholder: "Select or add venues...",
+        tags: true,
+        tokenSeparators: [',', ' '],
+        ajax: {
+            url: "get-venues.php",
+            dataType: 'json',
+            processResults: function(data) {
+                console.log("Raw response from get-venues.php:", data); // Log raw response
+                return {
+                    results: data
+                };
+            }
+        },
+        createTag: function(params) {
+            var term = $.trim(params.term);
+            if (term === '') {
+                return null;
+            }
+            
+
+            return {
+                id: term,
+                text: term,
+                newOption: true 
+            };
+        }
+    });
+
+    $.ajax({
+        url: "get-preselected-venues.php", 
+        dataType: "json",
+        success: function(preselectedValues) {
+            preselectedValues.forEach(function(value) {
+
+                let option = new Option(value.text, value.id, true, true);
+                $('#venue_lbl').append(option).trigger('change');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching venues from get-venues.php:", xhr.responseText, error);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get-preselected-venues.php
+// session_start(); // If session-based user identification is required
+// $mysqli = require __DIR__ . "/database.php";
+
+// if ($mysqli->connect_error) {
+//     die("Connection failed: " . $mysqli->connect_error);
+// }
+
+
+// $user_id = $_SESSION['user_id'];
+// $sql = " SELECT cep_id_fld, venue_fld 
+//             AS text FROM club_event_proposal_tbl
+//             WHERE user_id = ?";
+
+// $stmt = $mysqli->prepare($sql);
+// $stmt->bind_param("i", $user_id);
+// $stmt->execute();
+// $result = $stmt->get_result();
+
+// $data = [];
+// while ($row = $result->fetch_assoc()) {
+//     $data[] = $row;
+// }
+
+// if (!$result) {
+//     die("Query execution failed: " . $mysqli->error);  // Display execution errors
+// }
+
+// header('Content-Type: application/json');
+// echo json_encode($data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+session_start(); // If session-based user identification is required
+$mysqli = require __DIR__ . "/database.php";
+
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT cep_id_fld, venue_fld AS text FROM club_event_proposal_tbl WHERE cep_id_fld = ?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if (!$result) {
+    // If the query fails, return an error as JSON
+    http_response_code(500);  // Internal server error
+    echo json_encode(["error" => "Database query failed"]);
+    exit();
+}
+
+$data = [];
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
+
+header('Content-Type: application/json');
+echo json_encode($data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get-venues.php
+    // // Database connection
+    // $mysqli = require __DIR__ . "/database.php";
+
+    // // Check if the request is via POST
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //     // Retrieve the posted username from the AJAX request
+    //     $searchTerm = isset($_POST['q']) ? trim($_POST['q']) : '';
+
+    //     // Prepare the SQL query
+    //     $sql = "SELECT cep_id_fld, venue_fld
+    //             FROM club_event_proposal_tbl";
+        
+    //     $stmt = $mysqli->prepare($sql);
+    //     $searchTerm = '%' . $searchTerm . '%';
+    //     $stmt->bind_param('s', $searchTerm);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
+
+    //     $data = [];
+    //     if ($result->num_rows > 0) {
+    //         while ($row = $result->fetch_assoc()) {
+    //             $data[] = [
+    //                 'id' => $row['cep_id_fld'],
+    //                 'text' => $row['venue_fld']
+    //             ];
+    //         }
+    //     }
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode($data);
+
+    //     $stmt->close();
+    //     $mysqli->close();
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // $mysqli = require __DIR__ . "/database.php";
+
+    //     $sql = "SELECT cep_id_fld, venue_fld
+    //             FROM club_event_proposal_tbl";
+        
+    //     $result = $mysqli->query($sql);
+
+    //     $data = [];
+    //     if ($result->num_rows > 0) {
+    //         while ($row = $result->fetch_assoc()) {
+    //             $data[] = [
+    //                 'id' => $row['cep_id_fld'],
+    //                 'text' => $row['venue_fld']
+    //             ];
+    //         }
+    //     }
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode($data);
+
+    //     $mysqli->close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Assuming the form submission sends an array of selected or entered venues
+//     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['venue_lbl'])) {
+//         $selectedVenues = $_POST['venue_lbl']; // Array of selected/entered values
+
+//         $mysqli = require __DIR__ . "/database.php";
+
+//         if ($mysqli->connect_error) {
+//             die("Connection failed: " . $mysqli->connect_error);
+//         }
+
+//         foreach ($selectedVenues as $venue) {
+
+//             // Check if the value is an existing database ID or a custom value
+//             if (is_numeric($venue)) {
+
+//                 // Existing database ID, you can handle it as needed
+//                 echo "Existing venue ID: $venue<br>";
+//             } else {
+
+//                 $sql = "INSERT INTO club_event_proposal_tbl (venue_fld) VALUES (?)";
+
+//                 // Custom value: Insert it into the database
+//                 $stmt = $mysqli->prepare($sql);
+//                 $stmt->bind_param("s", $venue);
+//                 $stmt->execute();
+
+//                 echo "New venue added: $venue<br>";
+//             }
+//         }
+
+//         $mysqli->close();
+//     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // if ($mysqli->connect_error) {
+    //     die("Connection failed: " . $mysqli->connect_error);
+    // }
+
+    // $sql = "SELECT cep_id_fld, venue_fld AS text FROM club_event_proposal_tbl";
+    // $result = $mysqli->query($sql);
+
+    // $data = [];
+    // while ($row = $result->fetch_assoc()) {
+    //     $data[] = $row;
+    // }
+
+    // echo json_encode($data);
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // $mysqli = require __DIR__ . "/database.php";
+    
+    // if ($mysqli->connect_error) {
+    //     die("Connection failed: " . $mysqli->connect_error);
+    // }
+    
+    // $sql = "SELECT cep_id_fld, venue_fld 
+    //         AS text FROM club_event_proposal_tbl";
+
+    // $result = $mysqli->query($sql);
+    
+    // $data = [];
+    // while ($row = $result->fetch_assoc()) {
+    //     $data[] = $row; 
+    // }
+    
+
+    // header("Content-Type: application/json");
+    // echo json_encode($data);
+   
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $mysqli = require __DIR__ . "/database.php";
+    
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+    
+    $sql = "SELECT cep_id_fld, venue_fld AS text FROM club_event_proposal_tbl";
+    $result = $mysqli->query($sql);
+    
+    if (!$result) {
+        // If the query fails, return an error as JSON
+        http_response_code(500);  // Internal server error
+        echo json_encode(["error" => "Database query failed"]);
+        exit();
+    }
+    
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    
+    header("Content-Type: application/json");
+    echo json_encode($data);
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+process-cep.php
+
+    session_start();
+
+    if (isset($_SESSION["user_id"])) {
+        $mysqli = require __DIR__ . "/database.php";
+
+        $sql = "SELECT * FROM user_tbl
+                WHERE uname_id_fld = {$_SESSION["user_id"]};";
+
+        // $result = $mysqli->query($sql);
+        
+        // $user = $result->fetch_assoc();
+
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $_SESSION["user_id"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+    
+
+        if (isset($user) && ($user["role_fld"]) === "Club Advisor") {
+
+            if (empty($_POST["club_event_name_lbl"])) {
+                die("A Club Event Name is required");
+            }
+
+            if (empty($_POST["target_date_lbl"])) {
+                die("A Target Date is required");
+            }
+
+            if (empty($_POST["participants_lbl"])) {
+                die("Participants are required");
+            }
+
+            if (empty($_POST["venue_lbl"])) {
+                die("A Venue is required");
+            }
+
+            if (empty($_POST["objectives_lbl"])) {
+                die("Objectives are required");
+            }
+
+            if (empty($_POST["budget_lbl"])) {
+                die("A proposed Budget is required");
+            }
+
+            $mysqli = require __DIR__ . "/database.php";
+
+            $sql = "INSERT INTO club_event_proposal_tbl (club_event_name_fld, 
+                                                        target_date_fld, 
+                                                        participants_fld, 
+                                                        venue_fld, 
+                                                        objectives_fld,
+                                                        budget_fld,
+                                                        submitted_by_fld)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    
+            $stmt = $mysqli->stmt_init();
+
+            if ( ! $stmt->prepare($sql)) {
+                die("SQL error: " . $mysqli->error);
+            }
+
+            $stmt->bind_param("ssssss",
+                            $_POST["club_event_name_lbl"],
+                            $_POST["target_date_lbl"],
+                            $_POST["participants_lbl"],
+                            $_POST["venue_lbl"],
+                            $_POST["objectives_lbl"],
+                            $_POST["budget_lbl"],
+                            $user["uname_fld"]
+                            );
+
+                $stmt->execute();
+
+            header("Location: user-club-event-proposal.php");
+            exit;
+
+
+        }else{
+                
+            header("Location: index.php");
+            exit;
+                
+            }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    session_start();
+
+    if (isset($_SESSION["user_id"])) {
+        $mysqli = require __DIR__ . "/database.php";
+
+        $sql = "SELECT * FROM user_tbl
+                WHERE uname_id_fld = {$_SESSION["user_id"]};";
+
+        // $result = $mysqli->query($sql);
+        
+        // $user = $result->fetch_assoc();
+
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $_SESSION["user_id"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        $user = $result->fetch_assoc();
+    
+
+        if (isset($user) && ($user["role_fld"]) === "Club Advisor") {
+
+            if (empty($_POST["club_event_name_lbl"])) {
+                die("A Club Event Name is required");
+            }
+
+            if (empty($_POST["target_date_lbl"])) {
+                die("A Target Date is required");
+            }
+
+            if (empty($_POST["participants_lbl"])) {
+                die("Participants are required");
+            }
+
+            if (empty($_POST["venue_lbl"])) {
+                die("A Venue is required");
+            }
+
+            if (empty($_POST["objectives_lbl"])) {
+                die("Objectives are required");
+            }
+
+            if (empty($_POST["budget_lbl"])) {
+                die("A proposed Budget is required");
+            }
+
+
+        // Normalize venue input
+            $inputVenue = trim($_POST["venue_lbl"]); // Remove extra spaces
+            $normalizedVenue = strtolower(preg_replace('/\s+/', ' ', $inputVenue)); // Lowercase and remove duplicate spaces
+
+        // Check if the venue exists in the database (case-insensitive)
+            $sql = "SELECT venue_fld FROM club_event_proposal_tbl WHERE LOWER(venue_fld) = ?";
+            $stmt = $mysqli->prepare($sql);
+            $stmt->bind_param("s", $normalizedVenue);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($row = $result->fetch_assoc()) {
+        // Venue exists, use the original value
+                $finalVenue = $row["venue_fld"];
+            } else {
+        // Venue doesn't exist, save the normalized input as is
+                $finalVenue = ucwords($normalizedVenue); // Capitalize each word
+            }
+
+            $mysqli = require __DIR__ . "/database.php";
+
+            $sql = "INSERT INTO club_event_proposal_tbl (club_event_name_fld, 
+                                                        target_date_fld, 
+                                                        participants_fld, 
+                                                        venue_fld, 
+                                                        objectives_fld,
+                                                        budget_fld,
+                                                        submitted_by_fld)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    
+            $stmt = $mysqli->stmt_init();
+
+            if ( ! $stmt->prepare($sql)) {
+                die("SQL error: " . $mysqli->error);
+            }
+
+            $stmt->bind_param("ssssss",
+                            $_POST["club_event_name_lbl"],
+                            $_POST["target_date_lbl"],
+                            $_POST["participants_lbl"],
+                            $_POST["venue_lbl"],
+                            $_POST["objectives_lbl"],
+                            $_POST["budget_lbl"],
+                            $user["uname_fld"]
+                            );
+
+                $stmt->execute();
+
+            header("Location: user-club-event-proposal.php");
+            exit;
+
+
+        }else{
+                
+            header("Location: index.php");
+            exit;
+                
+            }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+session_start();
+
+// Check if the user is logged in
+if (isset($_SESSION["user_id"])) {
+    $mysqli = require __DIR__ . "/database.php";
+
+    // Fetch user details based on session user ID
+    $sql = "SELECT uname_fld, role_fld FROM user_tbl WHERE uname_id_fld = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["user_id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $user = $result->fetch_assoc();
+
+    // Check if the user is authorized (e.g., "Club Advisor")
+    if (isset($user) && $user["role_fld"] === "Club Advisor") {
+        // Validate input fields
+        if (empty($_POST["club_event_name_lbl"])) {
+            die("A Club Event Name is required.");
+        }
+
+        if (empty($_POST["target_date_lbl"])) {
+            die("A Target Date is required.");
+        }
+
+        if (empty($_POST["participants_lbl"])) {
+            die("Participants are required.");
+        }
+
+        if (empty($_POST["venue_lbl"])) {
+            die("At least one Venue is required.");
+        }
+
+        if (empty($_POST["objectives_lbl"])) {
+            die("Objectives are required.");
+        }
+
+        if (empty($_POST["budget_lbl"])) {
+            die("A proposed Budget is required.");
+        }
+
+        // Normalize and process multiple venues
+        $venues = $_POST["venue_lbl"]; // `venue_lbl` is now an array from the `select2` input
+        if (!is_array($venues)) {
+            die("Invalid venue input format.");
+        }
+
+        $processedVenues = [];
+
+        foreach ($venues as $venue) {
+            $venue = trim($venue); // Remove extra spaces
+            $normalizedVenue = strtolower(preg_replace('/\s+/', ' ', $venue)); // Lowercase and remove duplicate spaces
+
+            // Check if the venue exists in the database (case-insensitive)
+            $sql = "SELECT venue_fld FROM club_event_proposal_tbl WHERE LOWER(venue_fld) = ?";
+            $stmt = $mysqli->prepare($sql);
+            $stmt->bind_param("s", $normalizedVenue);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($row = $result->fetch_assoc()) {
+                // Venue exists, use the original value
+                $processedVenues[] = $row["venue_fld"];
+            } else {
+                // Venue doesn't exist, save the normalized input as is
+                $processedVenues[] = ucwords($normalizedVenue); // Capitalize each word
+            }
+        }
+
+        // Combine processed venues into a single string for storage
+        $finalVenues = implode(", ", $processedVenues);
+
+        // Insert data into `club_event_proposal_tbl`
+        $sql = "INSERT INTO club_event_proposal_tbl (
+                    club_event_name_fld, 
+                    target_date_fld, 
+                    participants_fld, 
+                    venue_fld, 
+                    objectives_fld, 
+                    budget_fld, 
+                    submitted_by_fld
+                ) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $mysqli->stmt_init();
+
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . $mysqli->error);
+        }
+
+        // Bind parameters and execute
+        $stmt->bind_param(
+            "sssssss",
+            $_POST["club_event_name_lbl"],
+            $_POST["target_date_lbl"],
+            $_POST["participants_lbl"],
+            $finalVenues, // Use the processed venues string
+            $_POST["objectives_lbl"],
+            $_POST["budget_lbl"],
+            $user["uname_fld"] // `uname_fld` of the logged-in user
+        );
+
+        if ($stmt->execute()) {
+            header("Location: user-club-event-proposal.php");
+            exit;
+        } else {
+            die("Database error: " . $stmt->error);
+        }
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+} else {
+    header("Location: login.php"); // Redirect to login if not logged in
+    exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+session_start();
+
+// Check if the user is logged in
+if (isset($_SESSION["user_id"])) {
+    $mysqli = require __DIR__ . "/database.php";
+
+    // Fetch user details based on session user ID
+    $sql = "SELECT uname_fld, role_fld FROM user_tbl WHERE uname_id_fld = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $_SESSION["user_id"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $user = $result->fetch_assoc();
+
+    // Check if the user is authorized (e.g., "Club Advisor")
+    if (isset($user) && $user["role_fld"] === "Club Advisor") {
+        // Validate input fields
+        if (empty($_POST["club_event_name_lbl"])) {
+            die("A Club Event Name is required.");
+        }
+
+        if (empty($_POST["target_date_lbl"])) {
+            die("A Target Date is required.");
+        }
+
+        if (empty($_POST["participants_lbl"])) {
+            die("Participants are required.");
+        }
+
+        if (empty($_POST["venue_lbl"])) {
+            die("At least one Venue is required.");
+        }
+
+        if (empty($_POST["objectives_lbl"])) {
+            die("Objectives are required.");
+        }
+
+        if (empty($_POST["budget_lbl"])) {
+            die("A proposed Budget is required.");
+        }
+
+        // Normalize and process multiple venues
+        $venues = $_POST["venue_lbl"]; // `venue_lbl` is now an array from the `select2` input
+        if (!is_array($venues)) {
+            die("Invalid venue input format.");
+        }
+
+        $processedVenues = [];
+
+        foreach ($venues as $venue) {
+            $venue = trim($venue); // Remove extra spaces
+            $normalizedVenue = strtolower(preg_replace('/\s+/', ' ', $venue)); // Lowercase and remove duplicate spaces
+
+            // Check if the venue exists in the database (case-insensitive)
+            $sql = "SELECT venue_fld FROM club_event_proposal_tbl WHERE LOWER(venue_fld) = ?";
+            $stmt = $mysqli->prepare($sql);
+            $stmt->bind_param("s", $normalizedVenue);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($row = $result->fetch_assoc()) {
+                // Venue exists, use the original value
+                $processedVenues[] = $row["venue_fld"];
+            } else {
+                // Venue doesn't exist, save the normalized input as is
+                $processedVenues[] = ucwords($normalizedVenue); // Capitalize each word
+            }
+        }
+
+        // Combine processed venues into a single string for storage
+        $finalVenues = implode(", ", $processedVenues);
+
+        // Insert data into `club_event_proposal_tbl`
+        $sql = "INSERT INTO club_event_proposal_tbl (
+                    club_event_name_fld, 
+                    target_date_fld, 
+                    participants_fld, 
+                    venue_fld, 
+                    objectives_fld, 
+                    budget_fld, 
+                    submitted_by_fld
+                ) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $mysqli->stmt_init();
+
+        if (!$stmt->prepare($sql)) {
+            die("SQL error: " . $mysqli->error);
+        }
+
+        // Bind parameters and execute
+        $stmt->bind_param(
+            "sssssss",
+            $_POST["club_event_name_lbl"],
+            $_POST["target_date_lbl"],
+            $_POST["participants_lbl"],
+            $finalVenues, // Use the processed venues string
+            $_POST["objectives_lbl"],
+            $_POST["budget_lbl"],
+            $user["uname_fld"] // `uname_fld` of the logged-in user
+        );
+
+        if ($stmt->execute()) {
+            header("Location: user-club-event-proposal.php");
+            exit;
+        } else {
+            die("Database error: " . $stmt->error);
+        }
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+} else {
+    header("Location: login.php"); // Redirect to login if not logged in
+    exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
